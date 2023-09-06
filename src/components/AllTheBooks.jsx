@@ -1,23 +1,25 @@
-import { Component } from "react";
-import { Container, Row, Col, Cards } from "react-bootstrap";
-import books from "../books/fantasy.json";
+import { Container, Row, Col, Card } from "react-bootstrap";
+import fantasy from "../books/fantasy.json";
 
-class AllTheBooks extends Component {
-  state = {
-    selectedBook: null,
-  };
-
-  render() {
-    return (
-      <Container>
-        <Row className="justify-content-center mt-4">
-          <Col md={4}>
-            <h2>Books Of The moment</h2>
-          </Col>
-        </Row>
-      </Container>
-    );
-  }
-}
+const AllTheBooks = () => {
+  return (
+    <Container>
+      <Row className="justify-content-center mt-4">
+        {fantasy.map((book) => {
+          return (
+            <Col xs={12} md={4} key={book.asin} className="mb-4">
+              <Card className="book-cover">
+                <Card.Img variant="top" src={book.img} />
+                <Card.Body>
+                  <Card.Title>{book.title}</Card.Title>
+                </Card.Body>
+              </Card>
+            </Col>
+          );
+        })}
+      </Row>
+    </Container>
+  );
+};
 
 export default AllTheBooks;

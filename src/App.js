@@ -3,14 +3,14 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import MyNav from "./components/myNav";
 import MyFooter from "./components/myFooter";
 import Welcome from "./components/Welcome";
-import AllTheBooks from "./components/AllTheBooks";
+import BookList from "./components/BookList";
 
 function App() {
   return (
     <>
       <MyNav brand="BookBucks" />
       <Welcome title="BookBucks" description="The Worlds worst place to get your books!" />
-      <AllTheBooks />
+      <BookList title="Fantasy" genre="fantasy" />
       <MyFooter />
     </>
   );
