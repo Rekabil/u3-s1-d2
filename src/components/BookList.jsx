@@ -31,7 +31,7 @@ const BookList = (props) => {
         {type.map((book) => {
           return (
             <Col xs={12} md={4} key={book.asin} className="mb-4">
-              <SingleBook img={book.img} title={book.title} />
+              <SingleBook img={book.img} title={book.title} asin={book.asin} />
             </Col>
           );
         })}

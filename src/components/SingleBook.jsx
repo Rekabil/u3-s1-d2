@@ -1,5 +1,7 @@
 import { Card } from "react-bootstrap";
 import { Component } from "react";
+import CommentArea from "./CommentArea";
+import { ListGroup } from "react-bootstrap";
 
 class SingleBook extends Component {
   constructor(props) {
@@ -25,6 +27,14 @@ class SingleBook extends Component {
         </a>
         <Card.Body>
           <Card.Title>{this.props.title}</Card.Title>
+          {this.state.selected ? (
+            <ListGroup>
+              {" "}
+              <CommentArea asin={this.props.asin} />
+            </ListGroup>
+          ) : (
+            ""
+          )}
         </Card.Body>
       </Card>
     );
