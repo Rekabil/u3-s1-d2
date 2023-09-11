@@ -1,9 +1,8 @@
 import { Component } from "react";
-import { ListGroup } from "react-bootstrap";
 
 class CommentArea extends Component {
   state = {
-    data: [],
+    comments: [],
     isLoading: true,
   };
 
@@ -12,7 +11,7 @@ class CommentArea extends Component {
       this.setState({ isLoading: true });
 
       try {
-        const response = await fetch("https://striveschool-api.herokuapp.com/api/comments/" + this.props.asin, {
+        const response = await fetch("https://striveschool-api.herokuapp.com/api/comments/", {
           headers: {
             Authorization:
               "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NGU4NjI4M2MwMzRmZjAwMTQwM2Y1NGQiLCJpYXQiOjE2OTQ0NDMzMDMsImV4cCI6MTY5NTY1MjkwM30.XZ5hS0rudBoiW0jWdQPFRtYz-_daWwF4dEwANvAToIw",
@@ -20,8 +19,9 @@ class CommentArea extends Component {
         });
         if (response.ok) {
           console.log(response);
-          const comment = await response.json();
-          this.setState({ data: comment });
+          const comments = await response.json();
+          const filteredComments = comments.filter((comment) => comment.elementId === this.props.asin);
+          this.setState({ comments: filteredComments });
         }
       } catch (error) {
         console.log(error);
@@ -32,11 +32,16 @@ class CommentArea extends Component {
   };
 
   render() {
-    console.log(this.state.data);
+    console.log(this.state.comments);
     return (
-      <div key={this.state.data._id}>
-        {this.state.data.rate} {this.state.data.comment}
-      </div>
+      <>
+        <h2>Comments</h2>
+        {this.state.comments.map((book) => (
+          <div key={book._id}>
+            {book.rate} {book.comment}
+          </div>
+        ))}
+      </>
     );
   }
 }
